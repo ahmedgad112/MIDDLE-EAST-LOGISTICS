@@ -1,6 +1,7 @@
 (function ($) {
     "use strict";
 
+    function initMain() {
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -109,6 +110,13 @@
             }
         }
     });
-    
+    } // end initMain
+
+    // تشغيل بعد تحميل الـ layout (nav + footer)
+    $(document).on("layoutLoaded", initMain);
+    // إذا الصفحة ما فيها layout (ما في navbar-container) نشغّل فوراً
+    if ($("#navbar-container").length === 0) {
+        $(function () { initMain(); });
+    }
 })(jQuery);
 
